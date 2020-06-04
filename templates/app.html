@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Movie recommendation system</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+    />
+
+    <style>
+      .alert {
+        background: WhiteSmoke;
+        padding: 1rem;
+        border-radius: 5px;
+        color: black;
+        margin: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>What Movie Will I Watch?</h3>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+      <form action="/send" method="POST">
+        <label for="Movie">Write title of a movie and I will sugest you similar options</label>
+        <input
+          type="text"
+          placeholder="e.g. Avatar"
+          class="u-full-width"
+          name="movie"
+        />
+       
+        <input type="submit" value="Find similars" />
+        <br />
+        <div class="alert">
+          <ul>
+            {% for movie in result %}
+              <li>{{ movie }}</li>
+            {% endfor %}  
+            </ul>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
