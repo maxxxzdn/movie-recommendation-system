@@ -13,12 +13,13 @@ from search_functions import get_recommendations
 """
 metadata = pd.read_csv('metadata.csv', squeeze=True)
 titles = pd.read_csv('titles.csv', squeeze=True)
+cosine_sim_path = 'cosine_sim2.txt'
 
 # Count number of word occurences in metadata string for every movie
-count = CountVectorizer(stop_words='english')
-count_matrix = count.fit_transform(metadata)
+#count = CountVectorizer(stop_words='english')
+#count_matrix = count.fit_transform(metadata)
 # Calculate cosine similarity to know how close metadata-vectors in word space to each other
-cosine_sim = cosine_similarity(count_matrix, count_matrix)
+#cosine_sim = cosine_similarity(count_matrix, count_matrix)
 
 # Create an instance of the Flask class for our web app
 app = Flask(__name__)
@@ -34,8 +35,8 @@ def send(sum=sum):
     if request.method == 'POST':
         movie = request.form['movie']
         # Check if movie is presented in the database
-        if movie in df.title:
-            result = get_recommendations(movie, cosine_sim, indices, df)
+        if movie in titles.values:
+            result = get_recommendations(movie, titles, cosine_sim_path)
         else:
             result = 'We dont have this movie in database'
 
