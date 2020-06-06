@@ -40,9 +40,13 @@
         <br />
         <div class="alert">
           <ul>
-            {% for movie in result %}
-              <li>{{ movie }}</li>
-            {% endfor %}  
+            {% if result|length > 0 %}
+              {% for movie in result %}
+                <li>{{ movie }}</li>
+              {% endfor %}
+            {% else %}
+              <li>We don't have this movie in database</li>
+            {% endif %}
             </ul>
         </div>
       </form>
