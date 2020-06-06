@@ -41,11 +41,13 @@
         <div class="alert">
           <ul>
             {% if result|length > 0 %}
-              {% for movie in result %}
-                <li>{{ movie }}</li>
-              {% endfor %}
-            {% else %}
-              <li>We don't have this movie in database</li>
+            	{% if result[0] != 'empty' %}
+              		{% for movie in result %}
+                		<li>{{ movie }}</li>
+              		{% endfor %}
+              	{% else %}
+              		<li>We don't have the movie in our database</li>
+              	{% endif %}
             {% endif %}
             </ul>
         </div>
