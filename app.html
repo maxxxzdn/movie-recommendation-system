@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Movie recommendation system</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+    />
+
+    <style>
+
+      .title {
+        text-align: center;
+      }
+
+      .container {
+        background: WhiteSmoke;
+        padding: 1rem;
+        text-align: auto;
+        border-radius: 5px;
+        color: black;
+        font-size: 16px;
+        margin: 1 auto;
+      }
+
+      .alert {
+        background: WhiteSmoke;
+        padding: 1rem;
+        border-radius: 5px;
+        color: black;
+        font-size: 16px;
+        margin: 1 auto;
+      }
+      select option{
+        font-size: 16px;
+      }
+      .u-full-width {
+        position: relative;
+        display: block;
+        padding: 1rem;
+        width: 100%;
+        height: 40px;
+        margin: 1 auto;
+        font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+        font-size: 16px;
+        color: #60666d;
+        
+      }
+
+      input[type=button], input[type=submit], input[type=reset] {
+        background-color: lightskyblue;
+        border: none;
+        margin: 1 auto;
+        width: 100%;
+        height: 40px;
+        font-size: 16px;
+        font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+        text-align: center;
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .label {
+        color: white;
+        font-size: 20px;
+      }
+      </style>
+
+  </head>
+  <body>
+    <div class="title">
+      <h3>What Movie Will I Watch?</h3>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+      <form action="/send" method="POST">
+        <label for="Movie">Write title of a movie or keywords and select type</label>
+        <input
+          type="text"
+          placeholder="e.g. Avatar"
+          class="u-full-width"
+          name="movie"
+        />
+
+        <label for="Operation">Search type</label>
+        <select class="u-full-width" name="operation">
+          <option value="movie">Search for similar movies</option>
+          <option value="keywords">Search by keywords</option>
+        </select>
+       
+        <input type="submit" value="Find similars" />
+        <br />
+        <div class="alert">
+          <ul>
+            {% if result|length > 0 %}
+              {% if result[0] == 'empty' %}
+                <li>We don't have the movie in our database</li>
+              {% elif result[0] == 'no keywords' %}
+                <li>No keywords typed</li>
+              {% elif result[0] == 'no movie' %}
+                <li>No movie typed</li>
+              {% else %}
+                {% for movie in result %}
+                  <li>{{ movie }}</li>
+                {% endfor %}
+              {% endif %}
+            {% endif %}
+          </ul>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
