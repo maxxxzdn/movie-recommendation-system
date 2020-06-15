@@ -79,15 +79,15 @@
     <!-- Form -->
     <div class="container">
       <form action="/send" method="POST">
-        <label for="Movie">Write title of a movie or keywords and select type</label>
+        <label for="Movie">Write title of a movie or keywords separated by comma</label>
         <input
           type="text"
-          placeholder="e.g. Avatar"
+          placeholder="e.g. Avatar or war, James McAvoy, Keira Knightley, drama"
           class="u-full-width"
           name="movie"
         />
 
-        <label for="Operation">Search type</label>
+        <label for="Operation">Select search type</label>
         <select class="u-full-width" name="operation">
           <option value="movie">Search for similar movies</option>
           <option value="keywords">Search by keywords</option>
