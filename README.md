@@ -1,3 +1,2 @@
-# movie-recommendation-system
+# movie.github.io
 Movie recommendation website
-
