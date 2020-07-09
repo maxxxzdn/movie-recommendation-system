@@ -80,9 +80,10 @@
     <div class="container">
       <form action="/send" method="POST">
         <label for="Movie">Write title of a movie or keywords separated by comma</label>
+        Possible keywords include genres and full names of actors or directors
         <input
           type="text"
-          placeholder="e.g. Avatar or war, James McAvoy, Keira Knightley, drama"
+          placeholder="e.g. Avatar or Joseph Gordon-Levitt, love, summer"
           class="u-full-width"
           name="movie"
         />
@@ -99,11 +100,23 @@
           <ul>
             {% if result|length > 0 %}
               {% if result[0] == 'empty' %}
-                <li>We don't have the movie in our database</li>
+                {% if result|length > 1 and result[1] != 'keywords'%}
+                  We don't have the movie you typed in our database :(
+                  <br></br> 
+                  <b>Showing results for: </b> {{result[1]}}
+                  <br></br> 
+                  {% for movie in result[2:] %}
+                    <li>{{ movie }}</li>
+                  {% endfor %}
+                {% elif result|length > 1 and result[1] == 'keywords'%}
+                    <b>Looks like you search by keywords. Please change search type</b>
+                {% else %}
+                <li><b>We don't have the movie in our database</b> </li>
+                {% endif %}
               {% elif result[0] == 'no keywords' %}
-                <li>No keywords typed</li>
+                <b>No keywords typed</b>
               {% elif result[0] == 'no movie' %}
-                <li>No movie typed</li>
+                <b>No movie typed</b>
               {% else %}
                 {% for movie in result %}
                   <li>{{ movie }}</li>
